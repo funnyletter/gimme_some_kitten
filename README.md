@@ -1,5 +1,7 @@
 # Gimme Some Kitten
 
+![Animated gif of printer printing a kitten](giphy.gif)
+
 Extends and modifies the original Adafruit [Python-Thermal-Printer](https://github.com/adafruit/Python-Thermal-Printer) library so the Raspberry Pi thermal printer will fetch an image of a kitten from twitter and print it when the button is pressed.
 
 Bad day? Kitten. Feeling sad? Kitten. Want to impress your friends? Kitten. I now have a box that does nothing except produce kittens on demand.
