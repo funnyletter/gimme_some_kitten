@@ -2,7 +2,10 @@
 
 import sys
 import datetime
+import requests
 from Adafruit_Thermal import *
+from PIL import Image
+from io import BytesIO
 
 printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
@@ -20,3 +23,12 @@ printer.boldOff()
 printer.println(fake_tweet['date'].strftime('%b %d %Y'))
 
 # printer.printImage(Image.open('gfx/hello.png'), True)
+
+response = requests.get(fake_tweet['image_url'])
+img = Image.open(BytesIO(response.content))
+img.thumbnail((384, 384))
+img.save('temp_img.jpg')
+
+printer.printImage(Image.open('temp_img.jpg'))
+
+printer.feed(3)
