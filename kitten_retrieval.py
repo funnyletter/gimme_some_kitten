@@ -1,5 +1,6 @@
 import tweepy as tw
 import datetime
+import os
 
 # asyncio bug workaround
 import asyncio
@@ -49,3 +50,70 @@ def search_tweets(search_term, result_type='recent', days_delta=7, tweet_count=2
             
     return tweetlist
 
+def url_is_new(img_url):
+    '''
+    Checks if this URL is one of the last 10 URLs printed, so we don't
+    print the same picture over and over. Returns True if the URL is 
+    not among the last 10 printed, or False if it has been printed
+    recently.
+    '''
+    if not os.path.exists('url_record.txt'):
+        return True
+    else:
+        with open('url_record.txt', 'r') as file:
+            urls = []
+            for line in file.readlines():
+                urls.append(line.strip())
+        if img_url in urls:
+            return False
+        else:
+            return True
+
+
+def pick_new_kitten(tweetlist):
+    '''
+    Returns info for a cute picture we haven't seen lately from the list
+    of tweets in tweetlist.
+    '''
+    if not os.path.exists('url_record.txt'):
+        tweet = tweetlist[0]
+        with open('url_record.txt', 'w') as file:
+            file.write(tweet['image_url'] + '\n')
+        return tweet
+    else:
+        for tweet in tweetlist:
+            if url_is_new(tweet['image_url']):
+                with open('url_record.txt', 'r') as file:
+                    urls = []
+                    for line in file.readlines():
+                        urls.append(line.strip())
+                    if len(urls) > 9:
+                        del urls[0]
+                    urls.append(tweet['image_url'] + '\n')
+                with open('url_record.txt', 'w') as write_file:
+                    for url in urls:
+                        write_file.write(url + '\n')
+                return tweet
+        return None
+
+
+fake_tweets = [
+    {
+        'screen_name': 'Alabama',
+        'image_url': 'http://www.google.com',
+        'date': datetime.datetime.today(),
+        'text': "This is the first fake tweet"
+    },
+    {
+        'screen_name': 'California',
+        'image_url': 'http://www.bing.com',
+        'date': datetime.datetime.today(),
+        'text': "This is the second fake tweet"
+    },
+    {
+        'screen_name': 'Delaware',
+        'image_url': 'http://www.yahoo.com',
+        'date': datetime.datetime.today(),
+        'text': "This is the third fake tweet"
+    }
+]
