@@ -23,7 +23,11 @@ auth.set_access_token(api_keys[2], api_keys[3])
 api = tw.API(auth, wait_on_rate_limit=True)
 
 
-def search_tweets(search_term='kitten', result_type='recent', days_delta=7, tweet_count=200):
+def search_tweets(
+    search_term='kitten',
+    result_type='recent',
+    days_delta=7,
+    tweet_count=200):
     """
     Searches twitter for the query given in search_term (string) starting
     from days_delta (int) in the past, and returns tweet_count (int) 
@@ -95,4 +99,3 @@ def pick_new_kitten(tweetlist):
                         write_file.write(url + '\n')
                 return tweet
         return None
-
