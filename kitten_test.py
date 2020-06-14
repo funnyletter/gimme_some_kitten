@@ -1,4 +1,3 @@
-#!/usr/bin/python
 
 import sys
 import datetime
@@ -16,19 +15,37 @@ fake_tweet = {
         'text': "This is a test kitten."
 }
 
+more_fake_tweets = [
+    {
+        'screen_name': 'Alabama',
+        'image_url': 'http://www.google.com',
+        'date': datetime.datetime.today(),
+        'text': "This is the first fake tweet"
+    },
+    {
+        'screen_name': 'California',
+        'image_url': 'http://www.bing.com',
+        'date': datetime.datetime.today(),
+        'text': "This is the second fake tweet"
+    },
+    {
+        'screen_name': 'Delaware',
+        'image_url': 'http://www.yahoo.com',
+        'date': datetime.datetime.today(),
+        'text': "This is the third fake tweet"
+    }
+]
+
 printer.boldOn()
 printer.println(f"@{fake_tweet['screen_name']}")
 printer.boldOff()
-
 printer.println(fake_tweet['date'].strftime('%b %d %Y'))
-
-# printer.printImage(Image.open('gfx/hello.png'), True)
 
 response = requests.get(fake_tweet['image_url'])
 img = Image.open(BytesIO(response.content))
 img.thumbnail((384, 384))
 img.save('temp_img.jpg')
 
-printer.printImage(Image.open('temp_img.jpg'))
+printer.printImage('temp_img.jpg')
 
 printer.feed(3)

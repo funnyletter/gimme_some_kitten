@@ -23,7 +23,7 @@ auth.set_access_token(api_keys[2], api_keys[3])
 api = tw.API(auth, wait_on_rate_limit=True)
 
 
-def search_tweets(search_term, result_type='recent', days_delta=7, tweet_count=200):
+def search_tweets(search_term='kitten', result_type='recent', days_delta=7, tweet_count=200):
     """
     Searches twitter for the query given in search_term (string) starting
     from days_delta (int) in the past, and returns tweet_count (int) 
@@ -96,24 +96,3 @@ def pick_new_kitten(tweetlist):
                 return tweet
         return None
 
-
-fake_tweets = [
-    {
-        'screen_name': 'Alabama',
-        'image_url': 'http://www.google.com',
-        'date': datetime.datetime.today(),
-        'text': "This is the first fake tweet"
-    },
-    {
-        'screen_name': 'California',
-        'image_url': 'http://www.bing.com',
-        'date': datetime.datetime.today(),
-        'text': "This is the second fake tweet"
-    },
-    {
-        'screen_name': 'Delaware',
-        'image_url': 'http://www.yahoo.com',
-        'date': datetime.datetime.today(),
-        'text': "This is the third fake tweet"
-    }
-]
