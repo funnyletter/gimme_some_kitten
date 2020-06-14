@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 # Main script for Adafruit Internet of Things Printer 2.  Monitors button
 # for taps and holds, performs periodic actions (Twitter polling by default)
 # and daily actions (Sudoku and weather by default).
@@ -20,6 +18,7 @@ import subprocess, time, socket
 from PIL import Image
 from Adafruit_Thermal import *
 
+
 ledPin       = 18
 buttonPin    = 23
 holdTime     = 2     # Duration for button hold (shutdown)
@@ -33,7 +32,7 @@ printer      = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 # Called when button is briefly tapped.  Invokes kitten printing script.
 def tap():
   GPIO.output(ledPin, GPIO.HIGH)  # LED on while working
-  subprocess.call(["python", "kitten_printer.py"])
+  subprocess.call(["python3", "kitten_printer.py"])
   GPIO.output(ledPin, GPIO.LOW)
 
 
