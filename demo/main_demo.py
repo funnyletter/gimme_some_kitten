@@ -34,8 +34,6 @@ printer      = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
 
 # Called when button is briefly tapped.  Invokes kitten printing script.
-  GPIO.output(ledPin, GPIO.HIGH)  # LED on while working
-
   demo_kittens = [
     {
         'screen_name': 'Bodegacats_',
@@ -73,6 +71,7 @@ printer      = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
     printer.feed(6)
 
 def tap():
+  GPIO.output(ledPin, GPIO.HIGH)  # LED on while working
   kitten = demo_kittens.pop()
   kitten_demo_print(kitten)
   GPIO.output(ledPin, GPIO.LOW)
