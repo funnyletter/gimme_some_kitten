@@ -20,7 +20,7 @@ def print_a_kitten():
         img.save('temp_img.jpg')
 
         printer.boldOn()
-        printer.println(f"@{cute_tweet['screen_name']}")
+        printer.println("@" + cute_tweet['screen_name'])
         printer.boldOff()
         printer.println(cute_tweet['date'].strftime('%b %d %Y'))
         printer.printImage('temp_img.jpg')
