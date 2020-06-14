@@ -30,7 +30,7 @@ lastId       = '1'   # State information passed to/from interval script
 printer      = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
 
-# Called when button is briefly tapped.  Invokes time/temperature script.
+# Called when button is briefly tapped.  Invokes kitten printing script.
 def tap():
   GPIO.output(ledPin, GPIO.HIGH)  # LED on while working
   subprocess.call(["python", "kitten_printer.py"])
