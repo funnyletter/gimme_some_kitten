@@ -34,41 +34,41 @@ printer      = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
 
 # Called when button is briefly tapped.  Invokes kitten printing script.
-  demo_kittens = [
-    {
-        'screen_name': 'Bodegacats_',
-        'image_url': 'https://pbs.twimg.com/media/EaWIqcYX0AA3P3_?format=jpg&name=large',
-        'date': datetime.date(2012, 6, 12),
-        'text': ""
-    },
-    {
-        'screen_name': 'filzballjaeger',
-        'image_url': 'https://pbs.twimg.com/media/EaPiTnXXQAAYWUT?format=jpg&name=large',
-        'date': datetime.date(2012, 6, 11),
-        'text': "I did nothing all day. It’s exhausting...🐾 #FluffyFursday #CatsOfTwitter"
-    },
-    {
-        'screen_name': 'Indie_TheBengal',
-        'image_url': 'https://pbs.twimg.com/media/EaVz58OXsAgRtrB?format=jpg&name=large',
-        'date': datetime.date(2012, 6, 12),
-        'text': "Finally persuaded my parents that I’m old enough to have my own twitter account... So, hi everyone! I’m Indiana Jones, but my friends call me Indie! #CatsOfTwitter #kitten"
-    }
-  ]
-  
-  def kitten_demo_print(fake_tweet):
-    printer.boldOn()
-    printer.println(f"@{fake_tweet['screen_name']}")
-    printer.boldOff()
-    printer.println(fake_tweet['date'].strftime('%b %d %Y'))
+demo_kittens = [
+  {
+      'screen_name': 'Bodegacats_',
+      'image_url': 'https://pbs.twimg.com/media/EaWIqcYX0AA3P3_?format=jpg&name=large',
+      'date': datetime.date(2012, 6, 12),
+      'text': ""
+  },
+  {
+      'screen_name': 'filzballjaeger',
+      'image_url': 'https://pbs.twimg.com/media/EaPiTnXXQAAYWUT?format=jpg&name=large',
+      'date': datetime.date(2012, 6, 11),
+      'text': "I did nothing all day. It’s exhausting...🐾 #FluffyFursday #CatsOfTwitter"
+  },
+  {
+      'screen_name': 'Indie_TheBengal',
+      'image_url': 'https://pbs.twimg.com/media/EaVz58OXsAgRtrB?format=jpg&name=large',
+      'date': datetime.date(2012, 6, 12),
+      'text': "Finally persuaded my parents that I’m old enough to have my own twitter account... So, hi everyone! I’m Indiana Jones, but my friends call me Indie! #CatsOfTwitter #kitten"
+  }
+]
 
-    response = requests.get(fake_tweet['image_url'])
-    img = Image.open(BytesIO(response.content))
-    img.thumbnail((384, 384))
-    img.save('temp_img.jpg')
+def kitten_demo_print(fake_tweet):
+  printer.boldOn()
+  printer.println(f"@{fake_tweet['screen_name']}")
+  printer.boldOff()
+  printer.println(fake_tweet['date'].strftime('%b %d %Y'))
 
-    printer.printImage('temp_img.jpg')
+  response = requests.get(fake_tweet['image_url'])
+  img = Image.open(BytesIO(response.content))
+  img.thumbnail((384, 384))
+  img.save('temp_img.jpg')
 
-    printer.feed(6)
+  printer.printImage('temp_img.jpg')
+
+  printer.feed(6)
 
 def tap():
   GPIO.output(ledPin, GPIO.HIGH)  # LED on while working
